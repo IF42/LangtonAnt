@@ -26,7 +26,7 @@ int main(void) {
 
     float rect_width = ((float) WINDOW_WIDTH) / ((float) model.formicarium.width);
     float rect_height = ((float) WINDOW_HEIGHT) / ((float) model.formicarium.height);
-	bool ant_alive = true;
+    bool ant_alive = true;
     /*
      * game loop
      */
