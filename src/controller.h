@@ -9,6 +9,6 @@
 ** Function for update ant position/state based on its current state
 */
 bool
-controler_ant_step(Model * model);
+controler_ant_step(AppModel * model);
 
 #endif

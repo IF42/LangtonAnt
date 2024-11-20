@@ -1,83 +1,55 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
 
+#include "formicarium.h"
+
 #include <stdlib.h>
-#include <time.h>
 #include <stdbool.h>
 
 
 /*
-** Enum for cell color types
-*/
-typedef enum
-{
-    CeelWhite = 0
-    , CeelBlue
-    , CeelRed
-    , CeelAnt
-}CellState;
+ * Orientation for ant in formicarium field
+ */
+typedef enum {
+    Ant_Orientation_North
+    , Ant_Orientation_East
+    , Ant_Orientation_South
+    , Ant_Orientation_West
+} Ant_Orientation;
 
 
 /*
-** Structure for recording coordinates and dimesions
-*/
-typedef struct
-{
-    int x;
-    int y;
-}Dimension, Coordinate;
+ * Ant defined as position
+ */
+typedef struct {
+    size_t x;
+    size_t y;
+    Ant_Orientation orientation;
+} Ant;
 
 
 /*
-** Orientation for ant in formicarium field
-*/
-typedef enum
-{
-    North
-    , East
-    , South
-    , West
-}Compas;
-
-
-/*
-** alias for two-dimensional array of CellState as Formicarium 
-*/
-typedef CellState ** Formicarium;
-
-
-/*
-** Model structure work as global state of application
-*/
-typedef struct 
-{
+ * AppModel structure work as global state of application
+ */
+typedef struct  {
    Formicarium formicarium;
-   Dimension formicariumSize;
-   Coordinate antPosition;
-   Compas direction;
-}Model;
+   Ant ant;
+} AppModel;
 
 
 /*
-** Constructor for Model data type
-*/
-Model *
-model_new(int width, int height);
+ * Constructor for AppModel data type
+ */
+AppModel model_init(Formicarium formicarium);
 
 
 /*
-** Function whitch retururns information if the ant is in 
-** bounds of formicarium field 
-*/
-bool
-model_ant_in_bounds(Model * model);
-
-
-/*
-** destructor for Model object class
-*/
-void
-model_finalize(Model * model);
+ * Function whitch retururns information if the ant is in 
+ * bounds of formicarium field 
+ */
+bool model_ant_in_bounds(AppModel * model);
 
 
 #endif
+
+

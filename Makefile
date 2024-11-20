@@ -1,48 +1,68 @@
-
-CFLAGS=$$(pkg-config --cflags gtk4) -Wall  -pedantic -O3 -std=c18 
-LIBS=$$(pkg-config --libs gtk4)
-BUILD=build
-TARGET=langton
 CC=gcc
-MODULES=\
-main.o\
-ui.o\
-view.o\
-model.o\
-controler.o
 
 
-all: prepare $(MODULES)
-	$(CC) $(CFLAGS) $(MODULES) $(LIBS) -o $(BUILD)/$(TARGET)
+CFLAGS += -Wall 
+CFLAGS += -Wextra 
+CFLAGS += -pedantic
+CFLAGS += -Ofast 
+CFLAGS += -Isrc
+CFLAGS += $$(pkg-config --cflags raylib)
+
+LIBS=-lm $$(pkg-config --libs raylib)
 
 
-main.o: app/main.c src/view.h src/ui.h
-	$(CC) $(CFLAGS) -c app/main.c -o main.o
-
-ui.o: src/ui.c src/ui.h
-	$(CC) $(CFLAGS) -c src/ui.c -o ui.o
+CACHE=.cache
+OUTPUT=$(CACHE)/release
 
 
-view.o: src/view.c src/view.h src/ui.h src/controler.h src/model.h
-	$(CC) $(CFLAGS) -c src/view.c -o view.o
+SRC=src
+APP=app
+
+TARGET=langtons_ant
 
 
-model.o: src/model.c src/model.h
-	$(CC) $(CFLAGS) -c src/model.c -o model.o
+ifeq ($(OS),Windows_NT)
+    CFLAGS += -mwindows
+else
+endif
 
 
-controler.o: src/controler.c src/controler.h src/model.h
-	$(CC) $(CFLAGS) -c src/controler.c -o controler.o
+
+MODULE += main.o
+MODULE += model.o
+MODULE += controller.o
+MODULE += formicarium.o
+OBJ=$(addprefix $(CACHE)/,$(MODULE))
 
 
-prepare:
-	mkdir -pv $(BUILD)
+build: env $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(OUTPUT)/$(TARGET)
 
-clean:
-	rm -frv $(BUILD)	
-	rm -fv *.o
 
-exec: all
-	$(BUILD)/$(TARGET)
+%.o:
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+-include dep.list
+
+
+exec: build 
+	$(OUTPUT)/$(TARGET)
+
+
+.PHONY: env dep clean
+
+
+dep:
+	$(CC) -MM $(APP)/*.c $(SRC)/*.c | sed 's|[a-zA-Z0-9_-]*\.o|$(CACHE)/&|' > dep.list
+
+
+env:
+	mkdir -pv $(CACHE)
+	mkdir -pv $(OUTPUT)
+
+
+clean: 
+	rm -vrf $(CACHE)
 
 

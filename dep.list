@@ -1,0 +1,7 @@
+.cache/main.o: app/main.c
+.cache/controller.o: src/controller.c src/controller.h src/model.h \
+ src/formicarium.h
+.cache/formicarium.o: src/formicarium.c src/formicarium.h
+.cache/model.o: src/model.c src/model.h src/formicarium.h
+.cache/ui.o: src/ui.c src/ui.h
+.cache/view.o: src/view.c src/view.h src/model.h src/formicarium.h
