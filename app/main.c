@@ -41,23 +41,23 @@ int main(void) {
         BeginDrawing();
         ClearBackground(LIGHTGRAY);
         
-		 for(size_t i = 0; i < model.formicarium.width; i++) {
-			 for(size_t j = 0; j < model.formicarium.height; j++) {
-				switch (formicarium_at(&model.formicarium, i, j)) {
-					case CeelBlue:
-						DrawRectangle(i*10, j*10, rect_width, rect_height, BLUE);
-						break;
-					case CeelRed:
-						DrawRectangle(i*10, j*10, rect_width, rect_height, RED);
-						break;
-					case CeelWhite:
-						DrawRectangle(i*10, j*10, rect_width, rect_height, LIGHTGRAY);
-						break;
-					case CeelAnt:  
-						DrawRectangle(i*10, j*10, rect_width, rect_height, BLACK);
-						break;
-				}
-			}
+        for(size_t i = 0; i < model.formicarium.width; i++) {
+            for(size_t j = 0; j < model.formicarium.height; j++) {
+                switch (formicarium_at(&model.formicarium, i, j)) {
+                    case CeelBlue:
+                        DrawRectangle(i*10, j*10, rect_width, rect_height, BLUE);
+                        break;
+                    case CeelRed:
+                        DrawRectangle(i*10, j*10, rect_width, rect_height, RED);
+                        break;
+                    case CeelWhite:
+                        DrawRectangle(i*10, j*10, rect_width, rect_height, LIGHTGRAY);
+                        break;
+                    case CeelAnt:  
+                        DrawRectangle(i*10, j*10, rect_width, rect_height, BLACK);
+                        break;
+                }
+            }
         }
 
         EndDrawing();
