@@ -1,3 +1,5 @@
 *.o
 build
 *.swp
+*.exe
+*.cache

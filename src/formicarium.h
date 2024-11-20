@@ -1,6 +1,7 @@
 #ifndef _FORMICARIUM_H_
 #define _FORMICARIUM_H_
 
+#include <stdbool.h>
 #include <stddef.h>
 
 /*
@@ -27,7 +28,7 @@ typedef struct {
 /*
  *
  */
-Formicarium formicarium_init (size_t width, size_t height);
+Formicarium formicarium_init (bool init_seed, size_t width, size_t height);
 
 
 /*

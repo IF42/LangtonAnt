@@ -15,18 +15,19 @@
 
 int main(void) {
     srand(time(NULL));
-    Formicarium formicarium = formicarium_init(WINDOW_WIDTH/10, WINDOW_HEIGHT/10);
+    Formicarium formicarium = formicarium_init(false, WINDOW_WIDTH/10, WINDOW_HEIGHT/10);
     AppModel model = model_init(formicarium);
 
     /*
      * window setup
      */
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Langton's ant");
-    SetTargetFPS(200);
+    SetTargetFPS(25);
 
     float rect_width = ((float) WINDOW_WIDTH) / ((float) model.formicarium.width);
     float rect_height = ((float) WINDOW_HEIGHT) / ((float) model.formicarium.height);
     bool ant_alive = true;
+
     /*
      * game loop
      */

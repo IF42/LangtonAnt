@@ -14,8 +14,8 @@ AppModel model_init(Formicarium formicarium) {
 
 
 bool model_ant_in_bounds(AppModel * model) {
-    if(model->ant.x < (model->formicarium.width - 1) 
-            && model->ant.y < (model->formicarium.height - 1)) {
+    if(model->ant.x < (model->formicarium.width) 
+            && model->ant.y < (model->formicarium.height)) {
         return true;
     } else {
         return false;
